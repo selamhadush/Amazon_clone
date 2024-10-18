@@ -3,6 +3,7 @@ import favicon from "./assets/favicon.ico";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Carousel from "./components/Carousel/CarouselEffect";
+import Category from "./components/Category/Category";
 function App() {
   const [count, setCount] = useState(0);
 
@@ -15,6 +16,7 @@ function App() {
       </div>
       <Header />
       <Carousel />
+      <Category />
     </>
   );
 }
