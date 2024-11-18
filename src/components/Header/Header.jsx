@@ -1,5 +1,6 @@
 import React from "react";
 import { FaSearchDollar } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { LiaCartArrowDownSolid } from "react-icons/lia";
 import { FaLocationDot } from "react-icons/fa6";
 import LowerHeader from "./LowerHeader";
@@ -11,12 +12,12 @@ function Header() {
         <div className={classes.header_container}>
           <div className={classes.logo_container}>
             {/* logo */}
-            <a href="/">
+            <Link to="/">
               <img
                 src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
                 alt=""
               />
-            </a>
+            </Link>
             <div className={classes.delivery}>
               {/* delivery */}
               <span>
@@ -39,7 +40,7 @@ function Header() {
           </div>
           {/* right side link  */}
           <div className={classes.order_container}>
-            <a href="" className={classes.language}>
+            <Link to="" className={classes.language}>
               <img
                 src="https://www.shutterstock.com/shutterstock/photos/2491312125/display_1500/stock-vector-usa-flag-icons-vector-set-united-states-of-america-flat-badges-flag-of-usa-vector-flat-symbol-2491312125.jpg"
                 alt=""
@@ -47,22 +48,22 @@ function Header() {
               <section>
                 <option value="">EN</option>
               </section>
-            </a>
+            </Link>
             {/* three components */}
-            <a href="">
+            <Link to="/SignOut">
               <p>Sign In</p>
               <span>Account & Lists</span>
-            </a>
+            </Link>
             {/* orders */}
-            <a href="">
+            <Link to="/Orders">
               <p>returns</p>
               <span>& orders</span>
-            </a>
+            </Link>
             {/* cart */}
-            <a href="" className={classes.cart}>
+            <Link to="/Cart" className={classes.cart}>
               <LiaCartArrowDownSolid size={35} />
               <span>0</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
