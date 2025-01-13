@@ -5,6 +5,7 @@ import SignUp from "./Pages/Auth/SignUp";
 import Payment from "./Pages/Payment/Payment";
 import Orders from "./Pages/Orders/Orders";
 import Cart from "./Pages/Cart/Cart";
+import Results from "./Pages/Results/Results";
 function Routing() {
   return (
     <div>
@@ -14,6 +15,7 @@ function Routing() {
           <Route path="/Auth" element={<SignUp />} />
           <Route path="/Payment" element={<Payment />} />
           <Route path="/Orders" element={<Orders />} />
+          <Route path="/category/:categoryName" element={<Results />} />
           <Route path="/Cart" element={<Cart />} />
         </Routes>
       </Router>
