@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaSearchDollar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { LiaCartArrowDownSolid } from "react-icons/lia";
 import { FaLocationDot } from "react-icons/fa6";
 import LowerHeader from "./LowerHeader";
 import classes from "./Header.module.css";
+import { DataContext } from "../DataProvider/DataProvider";
 function Header() {
+  const [{ basket }, dispatch] = useContext(DataContext);
+  //console.log(basket);
   return (
     <div>
       <section>
@@ -62,7 +65,7 @@ function Header() {
             {/* cart */}
             <Link to="/Cart" className={classes.cart}>
               <LiaCartArrowDownSolid size={35} />
-              <span>0</span>
+              <span>{basket.length}</span>
             </Link>
           </div>
         </div>
