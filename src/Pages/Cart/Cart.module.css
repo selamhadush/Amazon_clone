@@ -13,6 +13,9 @@
 .cart_container {
   padding: 20px;
 }
+.cart_container div {
+  height: auto !important;
+}
 .cart_container h2,
 .cart_container h3 {
   padding: 10px;
