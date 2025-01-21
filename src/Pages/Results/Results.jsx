@@ -36,7 +36,14 @@ function Results() {
         ) : (
           <div className={classes.products_container}>
             {results?.map((prodct) => {
-              return <ProductCard key={prodct.id} product={prodct} />;
+              return (
+                <ProductCard
+                  key={prodct.id}
+                  product={prodct}
+                  renderDesc={false}
+                  renderAdd={true}
+                />
+              );
             })}
           </div>
         )}
