@@ -6,9 +6,13 @@ import { FaLocationDot } from "react-icons/fa6";
 import LowerHeader from "./LowerHeader";
 import classes from "./Header.module.css";
 import { DataContext } from "../DataProvider/DataProvider";
+import { reducer } from "../../Utility/reducer";
 function Header() {
   const [{ basket }, dispatch] = useContext(DataContext);
   //console.log(basket);
+  const totalItems = basket?.reduce((amount, item) => {
+    return item.amount + amount;
+  }, 0);
   return (
     <section className={classes.fixed}>
       <section>
@@ -65,7 +69,7 @@ function Header() {
             {/* cart */}
             <Link to="/Cart" className={classes.cart}>
               <LiaCartArrowDownSolid size={35} />
-              <span>{basket.length}</span>
+              <span>{totalItems}</span>
             </Link>
           </div>
         </div>
