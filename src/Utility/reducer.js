@@ -11,7 +11,7 @@ export const reducer = (state, action) => {
         (item) => item.id === action.item.id
       );
       if (!existingItem) {
-        // If the item doesn't exist, add it with an initial amount of 1
+        // If the item doesn't exi t, add it with an initial amount of 1
         return {
           ...state,
           basket: [...state.basket, { ...action.item, amount: 1 }],
