@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import "firebase/firestore/";
-import "firebase/auth";
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDnR-pPMLYOhubtLug-nmZIO3sPCOO9mrY",
@@ -11,8 +11,7 @@ const firebaseConfig = {
   messagingSenderId: "705142812742",
   appId: "1:705142812742:web:61a6bd0d657a420ac7da47",
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const db = app.firestore();
+export const db = getFirestore(app);

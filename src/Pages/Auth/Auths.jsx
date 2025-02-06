@@ -1,12 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import classes from "./SignUp.module.css";
 import { Link } from "react-router-dom";
 import logo from "../../assets/loginlogo.png";
 import { IoIosArrowDown } from "react-icons/io";
+import { auth } from "../../Utility/fireBase";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import { DataContext } from "../../components/DataProvider/DataProvider";
+import { Type } from "../../Utility/action.type";
 function Auths() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => setIsOpen(!isOpen);
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [{ user }, dispatch] = useContext(DataContext);
+  const [error, setError] = useState("");
+  console.log(email, password);
+  console.log(user);
+  const authHandler = (e) => {
+    e.preventDefault();
+    console.log(e.target.name);
+    if (e.target.name == "signin") {
+      //start firebase authentication
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userInfo) => {
+          // console.log(userInfo);
+          dispatch({
+            type: Type.SET_USER,
+            user: userInfo.user,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else if (e.target.name == "register") {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userInfo) => {
+          console.log(userInfo);
+          dispatch({
+            type: Type.SET_USER,
+            user: userInfo.user,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
   return (
     <section className={classes.signin}>
       <Link>
@@ -17,13 +59,30 @@ function Auths() {
         <form action="">
           <div>
             <label htmlFor="email">Email</label>
-            <input type="Email" id="email" />
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="Email"
+              id="email"
+            />
           </div>
           <div>
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" />
+            <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              id="password"
+            />
           </div>
-          <button className={classes.login_signin_btn}>signin</button>
+          <button
+            type="submit"
+            onClick={authHandler}
+            name="signin"
+            className={classes.login_signin_btn}
+          >
+            signIn
+          </button>
         </form>
         <p>
           By continuing, you agree to Amazon_clon's{" "}
@@ -92,7 +151,12 @@ function Auths() {
         <span>New to Amazon Clone?</span>
         <hr className={classes.line} />
       </div>
-      <button className={classes.signup_btn}>
+      <button
+        type="submit"
+        onClick={authHandler}
+        name="register"
+        className={classes.signup_btn}
+      >
         Create your Amazon clone account
       </button>
     </section>
