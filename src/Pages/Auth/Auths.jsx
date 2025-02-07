@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import classes from "./SignUp.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/loginlogo.png";
 import { IoIosArrowDown } from "react-icons/io";
 import { auth } from "../../Utility/fireBase";
@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { DataContext } from "../../components/DataProvider/DataProvider";
 import { Type } from "../../Utility/action.type";
+import ClipLoader from "react-spinners/ClipLoader";
 function Auths() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => setIsOpen(!isOpen);
@@ -17,12 +18,18 @@ function Auths() {
   const [password, setPassword] = useState("");
   const [{ user }, dispatch] = useContext(DataContext);
   const [error, setError] = useState("");
-  console.log(email, password);
-  console.log(user);
+  const [loading, setLoading] = useState({
+    signIn:false,
+    signUp:false
+   });
+   const navigate = useNavigate();
+  // console.log(email, password);
+  // console.log(user);
   const authHandler = (e) => {
     e.preventDefault();
     console.log(e.target.name);
     if (e.target.name == "signin") {
+      setLoading({...loading, signIn:true})
       //start firebase authentication
       signInWithEmailAndPassword(auth, email, password)
         .then((userInfo) => {
@@ -31,11 +38,15 @@ function Auths() {
             type: Type.SET_USER,
             user: userInfo.user,
           });
+          setLoading({...loading, signIn:false})
+          navigate("/");
         })
         .catch((err) => {
-          console.log(err);
+          setError(err.message);
+          setLoading({...loading, signIn:false})
         });
     } else if (e.target.name == "register") {
+      setLoading({...loading, signUp:true})
       createUserWithEmailAndPassword(auth, email, password)
         .then((userInfo) => {
           console.log(userInfo);
@@ -43,15 +54,18 @@ function Auths() {
             type: Type.SET_USER,
             user: userInfo.user,
           });
+          setLoading({...loading, signUp:false});
+          navigate("/");
         })
         .catch((err) => {
-          console.log(err);
+          setError(err.message);
+          setLoading({...loading, signUp:false});
         });
     }
   };
   return (
     <section className={classes.signin}>
-      <Link>
+      <Link to={"/"}>
         <img src={logo} alt="logo" />
       </Link>
       <div className={classes.login_container}>
@@ -81,7 +95,10 @@ function Auths() {
             name="signin"
             className={classes.login_signin_btn}
           >
-            signIn
+            {loading.signIn?(<ClipLoader color="#000" size={15}></ClipLoader>
+            ):(
+              "signIn"
+            )}
           </button>
         </form>
         <p>
@@ -157,8 +174,14 @@ function Auths() {
         name="register"
         className={classes.signup_btn}
       >
-        Create your Amazon clone account
+         {loading.signUp? (
+          <ClipLoader color="#000" size={15}></ClipLoader>
+            ):(
+              " Create your Amazon clone account"
+            )}
+       
       </button>
+      {error &&<small style={{pading:"5px", color:"red"}} >{error}</small>}
     </section>
   );
 }

@@ -7,8 +7,9 @@ import LowerHeader from "./LowerHeader";
 import classes from "./Header.module.css";
 import { DataContext } from "../DataProvider/DataProvider";
 import { reducer } from "../../Utility/reducer";
+import {auth} from "../../Utility/fireBase"
 function Header() {
-  const [{ basket }, dispatch] = useContext(DataContext);
+  const [{user, basket }, dispatch] = useContext(DataContext);
   //console.log(basket);
   const totalItems = basket?.reduce((amount, item) => {
     return item.amount + amount;
@@ -19,7 +20,7 @@ function Header() {
         <div className={classes.header_container}>
           <div className={classes.logo_container}>
             {/* logo */}
-            <Link to="/">
+            <Link to={"/"}>
               <img
                 src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
                 alt=""
@@ -43,7 +44,7 @@ function Header() {
               <option value="All">All</option>
             </select>
             <input type="text" name="" id="" placeholder="search product" />
-            <FaSearchDollar size={25} />
+            <FaSearchDollar size={38} />
           </div>
           {/* right side link  */}
           <div className={classes.order_container}>
@@ -57,9 +58,23 @@ function Header() {
               </section>
             </Link>
             {/* three components */}
-            <Link to="/Auth">
-              <p>Sign In</p>
-              <span>Account & Lists</span>
+            <Link to={!user && "/Auth"}>
+            <div>
+              {
+                user ?(
+                <>
+                <p>Hello{user?.email?.split("@")[0]}</p>
+                  <span onClick={()=>auth.signOut()}>Sign Out</span>
+                </>
+                ):(
+                <>    
+                   <p>Sign In</p>
+                   <span>Account & Lists</span> 
+                   </>
+                 )}
+              
+              </div>
+             
             </Link>
             {/* orders */}
             <Link to="/Orders">
