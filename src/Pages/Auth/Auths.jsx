@@ -102,7 +102,7 @@ function Auths() {
           </button>
         </form>
         <p>
-          By continuing, you agree to Amazon_clon's{" "}
+          By continuing, you agree to Amazon_Clon's{" "}
           <a href="https://www.amazon.com/gp/help/customer/display.html/ref=ap_signin_notification_condition_of_use?ie=UTF8&nodeId=508088">
             Conditions of Use
           </a>{" "}

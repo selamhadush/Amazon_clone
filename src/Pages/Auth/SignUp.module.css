@@ -110,53 +110,6 @@
 .dropdownItem:hover {
   background-color: #f1f1f1;
 }
-/* .listBox {
-  font-size: medium;
-  font-weight: bold;
-  height: 30px;
-  box-decoration-break: none;
-  border: none !important;
-  outline: none !important;
-  border-color: none !important;
-  margin-bottom: 15px;
-  list-style-type: none;
-  list-style-position: inside;
-  list-style: none;
-  direction: rtl;
-  text-indent: 2px;
-  overflow: hidden; */
-
-/* appearance: inherit; */
-/* } */
-/* .listBox select {
-  direction: rtl;
-  white-space: 0.02cm;
-  border-color: none;
-}
-.select:first-child {
-  /* display: none; */
-/* position: fixed; */
-/* } */
-
-/* .select:hover {
-  opacity: 1;
-  pointer-events: all;
-  outline: none;
-}
-.select::selection {
-  user-select: text;
-} */
-
-/* .listBox option {
-  border: 0px;
-  direction: ltr;
-  box-sizing: none;
-  text-decoration-style: none;
-  scroll-snap-type: none;
-  list-style: none;
-  appearance: none;
-  pointer-events: none;
-} */
 .nh {
   margin-top: 10px;
   margin-bottom: 10px;
